@@ -9,6 +9,13 @@ When your document is ready, simply use :
 $('.your-selector').textDecapitator();
 ```
 
+You can also use multiple selectors : 
+
+
+```
+$('.your-first-selector, .your-second-selector').textDecapitator();
+```
+
 The default text will be assigned to the data-default-text attribute of the HTML element you are decapitating, in case you need it.
 
 ## Options
