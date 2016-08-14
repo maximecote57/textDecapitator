@@ -3,6 +3,13 @@ Single or multi-line truncation with ellipsis.
 
 ## How to use
 
+First, include the JS file (minified or non-minified) in your page.
+
+
+```
+<script src="js/textDecapitator.js"></script>
+```
+
 When your document is ready, simply use :
 
 ```
