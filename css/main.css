@@ -1,0 +1,22 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+ul, li{
+	list-style-type: none;
+}
+
+body{
+	padding: 50px 0px;
+}
+
+.artist__title{
+	font-size: 20px;
+	text-align: center;
+}
+
+.artist__title--small{
+	font-size: 12px;
+}

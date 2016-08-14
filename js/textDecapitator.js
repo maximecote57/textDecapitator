@@ -13,21 +13,34 @@
         return;
     }
 
-    $.fn.textDecapitator.defaultOptions = {
-        'truncateMode' : 'oneLine',
-        'specificHeight' : 30,
-        'cutRate' : 1
-    };
+    $.fn.textDecapitator = function(customOptions) {
 
-    $.fn.textDecapitator.textDecapitator = function() {
+        if(this.length <= 0) {
+            console.log('textDecapitator.js : No elements to decapitate.');
+            return;
+        }
+        var arraysOfElementsToDecapitate = new Array();
+        var selectors = this.selector.split(',');
 
-        $.fn.textDecapitator.options = $.extend(true, {}, $.fn.textDecapitator.defaultOptions, customOptions);
+        for (var i = selectors.length - 1; i >= 0; i--) {
+            arraysOfElementsToDecapitate.push($(selectors[i]));
+        }
 
-        $('[data-text-decapitator]').each(function() {
+        $.fn.textDecapitator.defaultOptions = {
+            'nbOfLines' : 1,
+            'cutRate' : 1
+        }
 
-            setDefaultCssProperties($(this));
-            truncateElementIfNecessary($(this));
+        $.fn.textDecapitator.options = $.extend(true, {}, $.fn.textDecapitator.defaultOptions, customOptions);        
 
+        $(arraysOfElementsToDecapitate).each(function(index, elementsToDecapitate) {
+            if($.fn.textDecapitator.options.nbOfLines !== 1) {
+                $.fn.textDecapitator.options.nbOfLinesHeight = $.fn.textDecapitator.options.nbOfLines * getElementLineHeight($(elementsToDecapitate[0]));
+            } 
+            $(elementsToDecapitate).each(function() {
+                setDefaultCssProperties($(this));
+                truncateElementIfNecessary($(this));
+            })            
         })
     }
 
@@ -43,13 +56,13 @@
 
     function getElementLineHeight($element) {
 
-        var targetHeight;
-
+        var elementLineHeight;
+        
         $element.css('white-space', 'nowrap');
-        targetHeight = $element.height();
+        elementLineHeight = $element.height();
         $element.css('white-space', 'normal');
 
-        return targetHeight;
+        return elementLineHeight;
 
     }
 
@@ -70,32 +83,28 @@
         $element.css({
             'text-overflow' : 'ellipsis',
             'overflow' : 'hidden',
-            'line-height' : '1.5'
+            'word-wrap' : 'break-word'
         })
 
     }
 
     function truncateElementIfNecessary($element) {
-
+        
         var elementHeight = $element.height();
         var oneLineHeight = getElementLineHeight($element);
 
-        if(MEV.Modules.TextTruncator.options.truncateMode === "specificHeight") {
-            var targetHeight = MEV.Modules.TextTruncator.options.specificHeight;
-            if(targetHeight < oneLineHeight) {
-                console.log('textDecapitator.js : specificHeight parameter is smaller than line-height of the target. Can\'t truncate.');
-                return;
-            }
-            else if(elementHeight > targetHeight) {
+        if($.fn.textDecapitator.options.nbOfLines !== 1) {
+            var targetHeight = $.fn.textDecapitator.options.nbOfLinesHeight;
+            if(elementHeight > targetHeight) {
                 while(elementHeight > targetHeight && $element.text().length > 0) {
                     var elementText = $element.text();
-                    $element.text(elementText.substring(0, elementText.length - MEV.Modules.TextTruncator.options.cutRate));
+                    $element.text(elementText.substring(0, elementText.length - $.fn.textDecapitator.options.cutRate));
                     elementHeight = getElementHeightWithFinalDots($element);
                 }
                 addFinalDotsToElement($element)
             }
         }
-        else if(MEV.Modules.TextTruncator.options.truncateMode === "oneLine"){
+        else {
             $element.css({
                 'white-space' : 'nowrap'
             })
