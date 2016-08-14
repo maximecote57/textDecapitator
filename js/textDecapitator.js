@@ -1,7 +1,7 @@
  /*
     textDecapitator.js 1.0.0
-    https://github.com/maximecote57/textDecapitator.js
-    Copyright 2016 @ Maxime Cote
+    https://github.com/maximecote57/textDecapitator
+    Copyright (c) 2016 Maxime Cote
 
     Licensed under the MIT license.
     http://en.wikipedia.org/wiki/MIT_License    
@@ -19,6 +19,7 @@
             console.log('textDecapitator.js : No elements to decapitate.');
             return;
         }
+
         var arraysOfElementsToDecapitate = new Array();
         var selectors = this.selector.split(',');
 
@@ -42,6 +43,10 @@
                 truncateElementIfNecessary($(this));
             })            
         })
+
+        if(typeof $.fn.textDecapitator.options.callback === "function") {
+            $.fn.textDecapitator.options.callback();
+        }
     }
 
     function addFinalDotsToElement($element) {
@@ -91,8 +96,8 @@
     function truncateElementIfNecessary($element) {
         
         var elementHeight = $element.height();
-        var oneLineHeight = getElementLineHeight($element);
-
+        $element.attr('data-default-text', $element.text());
+        
         if($.fn.textDecapitator.options.nbOfLines !== 1) {
             var targetHeight = $.fn.textDecapitator.options.nbOfLinesHeight;
             if(elementHeight > targetHeight) {
@@ -109,6 +114,6 @@
                 'white-space' : 'nowrap'
             })
         }
-    }            
+    }       
 
 })(jQuery);
