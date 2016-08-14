@@ -19,3 +19,15 @@ less precise.
 - nbOfLines : the number of lines that you want in the elements of your selector(s).
 
 - callback : callback function executed when all the elements are decapitated.
+
+Example using default values : 
+
+```
+$('.your-selector').textDecapitator({
+	cutRate : 1,
+	nbOfLines : 1,
+	callback : function() {
+
+	}
+});
+```
