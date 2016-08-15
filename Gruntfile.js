@@ -8,8 +8,8 @@ module.exports = function(grunt) {
 
         uglify: {      
             mainJs: { 
-                src :  'js/textDecapitator.js',
-                dest : 'js/textDecapitator.min.js' 
+                src :  'js/textTruncator.js',
+                dest : 'js/textTruncator.min.js' 
             }
         }
 

@@ -1,4 +1,4 @@
-# textDecapitator
+# textTruncator
 Single or multi-line truncation with ellipsis.
 
 ## How to use
@@ -7,20 +7,20 @@ First, include the JS file (minified or non-minified) in your page.
 
 
 ```
-<script src="js/textDecapitator.js"></script>
+<script src="js/textTruncator.js"></script>
 ```
 
 When your document is ready, simply use :
 
 ```
-$('.your-selector').textDecapitator();
+$('.your-selector').textTruncator();
 ```
 
 You can also use multiple selectors : 
 
 
 ```
-$('.your-first-selector, .your-second-selector').textDecapitator();
+$('.your-first-selector, .your-second-selector').textTruncator();
 ```
 
 The default text will be assigned to the data-default-text attribute of the HTML element you are decapitating, in case you need it.
@@ -39,7 +39,7 @@ less precise.
 Example using default values : 
 
 ```
-$('.your-selector').textDecapitator({
+$('.your-selector').textTruncator({
 	cutRate : 1,
 	nbOfLines : 1,
 	callback : function() {

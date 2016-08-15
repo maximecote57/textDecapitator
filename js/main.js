@@ -14,7 +14,9 @@ function initBackbone() {
 		      });
 		      self.$el.append(artist.render().el);
 		    });			
-		    $('.artist h5').textDecapitator();			
+		    $('.artist h5').textTruncator({
+		    	nbOfLines : 1
+		    });			
 		}		
 	});
 

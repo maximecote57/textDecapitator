@@ -1,6 +1,6 @@
  /*
-    textDecapitator.js 1.0.0
-    https://github.com/maximecote57/textDecapitator
+    textTruncator.js 1.0.0
+    https://github.com/maximecote57/textTruncator
     Copyright (c) 2016 Maxime Cote
 
     Licensed under the MIT license.
@@ -9,14 +9,14 @@
 
 (function($) {
     
-    if ($.fn.textDecapitator) {
+    if ($.fn.textTruncator) {
         return;
     }
 
-    $.fn.textDecapitator = function(customOptions) {
+    $.fn.textTruncator = function(customOptions) {
 
         if(this.length <= 0) {
-            console.log('textDecapitator.js : No elements to decapitate.');
+            console.log('textTruncator.js : No elements to decapitate.');
             return;
         }
 
@@ -27,16 +27,16 @@
             arraysOfElementsToDecapitate.push($(selectors[i]));
         }
 
-        $.fn.textDecapitator.defaultOptions = {
+        $.fn.textTruncator.defaultOptions = {
             'nbOfLines' : 1,
             'cutRate' : 1
         }
 
-        $.fn.textDecapitator.options = $.extend(true, {}, $.fn.textDecapitator.defaultOptions, customOptions);        
+        $.fn.textTruncator.options = $.extend(true, {}, $.fn.textTruncator.defaultOptions, customOptions);        
 
         $(arraysOfElementsToDecapitate).each(function(index, elementsToDecapitate) {
-            if($.fn.textDecapitator.options.nbOfLines !== 1) {
-                $.fn.textDecapitator.options.nbOfLinesHeight = $.fn.textDecapitator.options.nbOfLines * getElementLineHeight($(elementsToDecapitate[0]));
+            if($.fn.textTruncator.options.nbOfLines !== 1) {
+                $.fn.textTruncator.options.nbOfLinesHeight = $.fn.textTruncator.options.nbOfLines * getElementLineHeight($(elementsToDecapitate[0]));
             } 
             $(elementsToDecapitate).each(function() {
                 setDefaultCssProperties($(this));
@@ -44,8 +44,8 @@
             })            
         })
 
-        if(typeof $.fn.textDecapitator.options.callback === "function") {
-            $.fn.textDecapitator.options.callback();
+        if(typeof $.fn.textTruncator.options.callback === "function") {
+            $.fn.textTruncator.options.callback();
         }
     }
 
@@ -98,12 +98,12 @@
         var elementHeight = $element.height();
         $element.attr('data-default-text', $element.text());
         
-        if($.fn.textDecapitator.options.nbOfLines !== 1) {
-            var targetHeight = $.fn.textDecapitator.options.nbOfLinesHeight;
+        if($.fn.textTruncator.options.nbOfLines !== 1) {
+            var targetHeight = $.fn.textTruncator.options.nbOfLinesHeight;
             if(elementHeight > targetHeight) {
                 while(elementHeight > targetHeight && $element.text().length > 0) {
                     var elementText = $element.text();
-                    $element.text(elementText.substring(0, elementText.length - $.fn.textDecapitator.options.cutRate));
+                    $element.text(elementText.substring(0, elementText.length - $.fn.textTruncator.options.cutRate));
                     elementHeight = getElementHeightWithFinalDots($element);
                 }
                 addFinalDotsToElement($element)

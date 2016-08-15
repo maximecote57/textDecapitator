@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Text Decapitator</title>
+        <title>Text Truncator</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,7 +33,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/textDecapitator.js"></script>
+        <script src="js/textTruncator.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
